@@ -9,22 +9,30 @@ package com.cloudfly.algorithm.offer;
  */
 public class Test11 {
     public int NumberOf1(int n) {
-        int sum = 0;
-        int a = n;
-        n = n>0?n:-n;
-        while (n>0){
-            if (n%2==1){
-                sum++;
-            }
-            n/=2;
+        int count = 0;
+        while (n!=0){
+            n = n&(n-1);
+            count++;
         }
-        return a>=0?sum:sum+1;
+        return count;
     }
 
     public static void main(String[] args) {
         System.out.println(new Test11().NumberOf1(-2));
+        System.out.println(new Test11().NumberOf1(-1));
+        System.out.println(new Test11().NumberOf1(-0));
+        System.out.println(new Test11().NumberOf1(0));
         System.out.println(new Test11().NumberOf1(3));
         System.out.println(new Test11().NumberOf1(4));
         System.out.println(new Test11().NumberOf1(5));
+        System.out.println(new Test11().NumberOf1(6));
+        System.out.println(new Test11().NumberOf1(7));
+        System.out.println(new Test11().NumberOf1(787));
+        System.out.println(1<<30);
+        System.out.println(1<<31);
+        System.out.println(1<<32);
+        System.out.println(1<<33);
+        System.out.println((1<<31)-1);
+        System.out.println(Integer.MAX_VALUE == 2147483647);
     }
 }

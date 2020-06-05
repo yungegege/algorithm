@@ -12,15 +12,24 @@ import java.util.Stack;
 public class Luoji {
 
     public static void main(String[] args) {
-        String str = "G|A|B|(A|(B&C))&(D|E)";
+        String[] arr = new String[]{
+                "G|A|B|(A|(B&C))&(D|E)",
+                "G|A|B|(A|(B&C))&(D|E",
+                ")G|A|B|(A|(B&C))&(D|E)",
+                "G|A|B|(A|(B&))&(D|E)"
+        };
 
-        str = process(str);
-        System.out.println(str);
-//        System.out.println(Integer.valueOf('('));
-//        System.out.println(Integer.valueOf(')'));
+        for (int i = 1; i <= arr.length; i++) {
+            try {
+                arr[i - 1] = process(arr[i - 1]);
+                System.out.println("第" + i + "个字符串解析成功: " + arr[i - 1]);
+            } catch (Exception e) {
+                System.out.println("第" + i + "个字符串: " + arr[i - 1] + " " + e.getMessage());
+            }
+        }
     }
 
-    private static String process(String str) {
+    private static String process(String str) throws Exception {
         Stack<String> stack = new Stack<>();
         char[] chars = str.toCharArray();
         int i = 0;
@@ -34,6 +43,8 @@ public class Luoji {
         while (!stack.isEmpty() && i < chars.length - 1) {
             i++;
             char a = chars[i];
+            // 验证语法
+            verify(stack, a, num);
             // 如果是字母
             if (isLetter(a)) {
                 // 如果栈顶是左括号,直接入栈，如果有左括号也直接入栈
@@ -41,7 +52,7 @@ public class Luoji {
                     stack.push(String.valueOf(a));
                 } else {
                     // 合并一波
-                    mergeStr(stack,a,num,i,chars);
+                    mergeStr(stack, a, num, i, chars);
                 }
             } else if (isLeftSign(a)) {
                 // 左括号直接入栈，并且num++
@@ -50,20 +61,35 @@ public class Luoji {
             } else if (isRightSign(a)) {
                 // 如果是右括号,要出一波栈了,并且num--
                 num--;
-                mergeStr(stack,a,num,i,chars);
+                mergeStr(stack, a, num, i, chars);
             } else {
                 // 其他& | ,直接入栈
                 stack.push(String.valueOf(a));
             }
         }
-        stack.push(stack.peek().substring(1,stack.pop().length()-1));
+        if (num != 0) {
+            throw new Exception("括号不匹配");
+        }
+        stack.push(stack.peek().substring(1, stack.pop().length() - 1));
         return stack.pop();
     }
 
-    private static void mergeStr(Stack<String> stack, char a,int num,int i,char[] chars) {
+    private static void verify(Stack<String> stack, char a, int num) throws Exception {
+        if (num < 0) {
+            throw new Exception("右括号多了");
+        }
+        if (isLetter(a) && isLetter(stack.peek().toCharArray()[0])) {
+            throw new Exception("字母之间没有别的字符");
+        }
+        if (isRightSign(a) && ("&".equals(stack.peek()) || "|".equals(stack.peek()))) {
+            throw new Exception("存在&)或者|)");
+        }
+    }
+
+    private static void mergeStr(Stack<String> stack, char a, int num, int i, char[] chars) {
         StringBuffer sb = new StringBuffer();
         // 这个是字母，栈顶是操作符，并且没有左括号，就要加一波括号了
-        if (isLetter(a)){
+        if (isLetter(a)) {
             String operate = String.valueOf(stack.pop());
             String leftStr = String.valueOf(stack.pop());
             sb.append("(");
@@ -72,11 +98,11 @@ public class Luoji {
             sb.append(a);
             sb.append(")");
             stack.push(sb.toString());
-        }else {
+        } else {
             // 这个是右括号
             String firstStr = String.valueOf(stack.pop());
             String secondStr = String.valueOf(stack.pop());
-            if (!secondStr.equals("(")){
+            if (!secondStr.equals("(")) {
                 String leftStr = String.valueOf(stack.pop());
                 String leftSign = String.valueOf(stack.pop());
                 sb.append(leftSign);
@@ -87,18 +113,18 @@ public class Luoji {
             sb.append(")");
             stack.push(sb.toString());
 
-            while (stack.size() > 1 && num==0) {
+            while (stack.size() > 1 && num == 0) {
                 StringBuffer sb2 = new StringBuffer();
                 String rightStr2 = String.valueOf(stack.pop());
                 String operate2 = String.valueOf(stack.pop());
                 String leftStr2 = String.valueOf(stack.pop());
-                if ((operate2.equals("|") || i==chars.length-1) && stack.size()<=1){
+                if ((operate2.equals("|") || i == chars.length - 1) && stack.size() <= 1) {
                     sb2.append("(");
                 }
                 sb2.append(leftStr2);
                 sb2.append(operate2);
                 sb2.append(rightStr2);
-                if ((operate2.equals("|") || i==chars.length-1) && stack.size()<=1){
+                if ((operate2.equals("|") || i == chars.length - 1) && stack.size() <= 1) {
                     sb2.append(")");
                 }
                 stack.push(sb2.toString());
@@ -112,10 +138,6 @@ public class Luoji {
 
     private static boolean isRightSign(char c) {
         return Integer.valueOf(c) == 41;
-    }
-
-    private static boolean isSign(char a) {
-        return Integer.valueOf(a) == 40 && Integer.valueOf(a) <= 41;
     }
 
     private static boolean isLetter(char a) {

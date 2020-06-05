@@ -6,7 +6,7 @@ package com.cloudfly.algorithm.nowcoder.junior.class_1;
 public class Code_09_NetherlandsFlag {
     public static void main(String[] args) {
         int[] arr = new int[]{4, 5, 6, 2, 8, 3, 7, 9, 5, 21, 8, 21, 78, 3, 76, 1, 3, 8};
-        netherlandsFlag(arr,8);
+        netherlandsFlag(arr, 8);
         printArr(arr);
     }
 
@@ -14,13 +14,13 @@ public class Code_09_NetherlandsFlag {
         int l = -1;
         int r = arr.length;
         int i = 0;
-        while (i<r){
-            if (arr[i]<num){
-                swap(arr,++l,i++);
-            }else if (arr[i]==num){
+        while (i < r) {
+            if (arr[i] < num) {
+                swap(arr, ++l, i++);
+            } else if (arr[i] == num) {
                 i++;
-            }else {
-                swap(arr,--r,i);
+            } else {
+                swap(arr, --r, i);
             }
         }
     }

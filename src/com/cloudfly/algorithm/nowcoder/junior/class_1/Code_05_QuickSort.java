@@ -1,5 +1,8 @@
 package com.cloudfly.algorithm.nowcoder.junior.class_1;
 
+/**
+ * 快排
+ */
 public class Code_05_QuickSort {
     public static void main(String[] args) {
         int[] arr = new int[]{4, 5, 6, 2, 6, 3, 7, 9, 5, 21, 8, 21, 78, 3, 76, 1, 3, 34, 235, 3, 352, 243, 35, 4754, 3, 26, 12, 21, 423, 24, 574535, 3, 23523, 1215135, 135, 235, 426, 4, 443, 443, 3434};

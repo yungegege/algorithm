@@ -68,11 +68,42 @@ public class Graph {
         System.out.print(b);
     }
 
+
+    private boolean flag;
+
     /**
      * 深度优先遍历
      */
-    public void dfs(){
+    public void dfs(int a, int b) {
+        if (a == b) {
+            return;
+        }
+        int[] pre = new int[v];
+        boolean[] visit = new boolean[v];
+        for (int i = 0; i < v; i++) {
+            pre[i] = -1;
+        }
+        dfs_digui(a, b, pre, visit);
+        print(pre, a, b);
+    }
 
+
+    private void dfs_digui(int a, int b, int[] pre, boolean[] visit) {
+        if (flag) {
+            return;
+        }
+        visit[a] = true;
+        if (a == b) {
+            flag = true;
+            return;
+        }
+        LinkedList<Integer> linkedList = adj[a];
+        for (int i = 0; i < linkedList.size(); i++) {
+            if (!visit[linkedList.get(i)]) {
+                pre[linkedList.get(i)] = a;
+                dfs_digui(linkedList.get(i), b, pre, visit);
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -92,7 +123,12 @@ public class Graph {
 //        graph.add(0, 3);
 //        graph.add(0, 3);
 
-        graph.bfs(0, 4);
+        System.out.println("广度遍历：");
+        graph.bfs(0, 5);
+        System.out.println();
+        System.out.println("深度遍历：");
+        graph.dfs(0, 5);
+        
     }
 
 

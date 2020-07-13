@@ -15,12 +15,12 @@ public class Test40 {
         System.out.println(Arrays.toString(getLeastNumbers(arr, 4)));
     }
 
+    // 复习一下单调栈结构
     // 大根堆
     public static int[] getLeastNumbers(int[] arr, int k) {
         // 前k个数建个大根堆
 
         // 然后后面的数,大于堆顶元素，则跳过，小于堆顶元素，则放入堆顶，堆再调整下
-
 
 
         return null;

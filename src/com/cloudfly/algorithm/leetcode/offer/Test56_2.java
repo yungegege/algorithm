@@ -1,4 +1,4 @@
 package com.cloudfly.algorithm.leetcode.offer;
 
-public class Test58 {
+public class Test56_2 {
 }

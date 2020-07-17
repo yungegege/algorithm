@@ -1,7 +1,7 @@
 package com.cloudfly.algorithm.leetcode.offer;
 
 
-import com.cloudfly.algorithm.leetcode.offer.node.TreeNode;
+import com.cloudfly.algorithm.leetcode.node.TreeNode;
 
 import java.util.Arrays;
 

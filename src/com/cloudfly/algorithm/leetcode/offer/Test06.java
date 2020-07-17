@@ -1,6 +1,6 @@
 package com.cloudfly.algorithm.leetcode.offer;
 
-import com.cloudfly.algorithm.leetcode.offer.node.ListNode;
+import com.cloudfly.algorithm.leetcode.node.ListNode;
 
 import java.util.Arrays;
 

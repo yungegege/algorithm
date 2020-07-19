@@ -17,9 +17,11 @@ public class Test53_1 {
 
     public static void main(String[] args) {
         int[] arr = new int[]{
-                5, 7, 7, 8, 8, 8, 10
+                6, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 9
         };
         System.out.println(search(arr, 7));
+        System.out.println(search(arr, 8));
+        System.out.println(search(arr, 9));
 
     }
 
@@ -30,26 +32,32 @@ public class Test53_1 {
         if (arr.length == 0) {
             return 0;
         }
-        int i = findBig(arr, target);
-        int j = findSmall(arr, target);
-        return i == -1 && j == -1 ? 0 : j - i + 1;
+        int i = findSmall(arr, target);
+        if (i == -1) {
+            return 0;
+        }
+        int j = findBig(arr, target);
+        return j - i + 1;
     }
 
     /**
-     * 找第一个比target大的
+     * 找target的最大索引
      */
     private static int findBig(int[] arr, int target) {
+        if (arr[arr.length - 1] == target) {
+            return arr.length - 1;
+        }
         int left = 0;
         int right = arr.length - 1;
         int mid = left + (right - left) / 2;
         while (left <= right) {
-            if (mid - 1 >= 0 && arr[mid] == target && arr[mid - 1] < target) {
+            if (mid + 1 < arr.length && arr[mid] == target && arr[mid + 1] > target) {
                 return mid;
             }
-            if (arr[mid] < target) {
+            if (arr[mid] <= target) {
                 left = mid + 1;
             } else {
-                right = mid;
+                right = mid - 1;
             }
             mid = left + (right - left) / 2;
 
@@ -58,20 +66,21 @@ public class Test53_1 {
     }
 
     private static int findSmall(int[] arr, int target) {
+        if (arr[0] == target) {
+            return 0;
+        }
         int left = 0;
         int right = arr.length - 1;
-        int mid = left + (right - left) / 2;
         while (left <= right) {
-            if (mid + 1 <= arr.length && arr[mid] == target && arr[mid + 1] > target) {
+            int mid = left + (right - left) / 2;
+            if (mid - 1 >= 0 && arr[mid] == target && arr[mid - 1] < target) {
                 return mid;
             }
-            if (arr[mid] <= target) {
-                left = mid;
+            if (arr[mid] < target) {
+                left = mid + 1;
             } else {
                 right = mid - 1;
             }
-            mid = left + (right - left) / 2;
-
         }
         return -1;
     }

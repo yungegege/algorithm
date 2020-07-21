@@ -5,7 +5,7 @@ package com.cloudfly.algorithm.leetcode.offer;
  * 示例 1：
  * 输入: n = 3
  * 输出: 6
- *
+ * <p>
  * 示例 2：
  * 输入: n = 9
  * 输出: 45
@@ -17,7 +17,9 @@ public class Test64 {
         System.out.println(sumNums(9));
     }
 
-    public static int sumNums(int n) {
-        return 0;
+        public static int sumNums(int n) {
+        int res = n;
+        boolean a = (n!=0) && ((res=(res + sumNums(n - 1)))>0);
+        return res;
     }
 }

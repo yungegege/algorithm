@@ -1,5 +1,8 @@
 package com.cloudfly.algorithm.leetcode.offer;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * 输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
  * <p>
@@ -12,10 +15,22 @@ package com.cloudfly.algorithm.leetcode.offer;
 public class Test45 {
 
     public static void main(String[] args) {
-        System.out.println(new Integer(3).compareTo(new Integer(4)));
+        int[] arr = new int[]{
+                3, 30, 34, 5, 9
+        };
+        System.out.println(minNumber(arr));
     }
 
     public static String minNumber(int[] nums) {
-        return null;
+        String[] arr = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(arr, (a, b) -> (a + b).compareTo(b + a));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(arr[i]);
+        }
+        return sb.toString();
     }
 }

@@ -27,6 +27,18 @@ public class Test63 {
     }
 
     public static int maxProfit(int[] prices) {
-        return 0;
+        int minVal = Integer.MAX_VALUE;
+        int res = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i]<minVal){
+                minVal = prices[i];
+            }else {
+                if (res<prices[i]-minVal){
+                    res = prices[i]-minVal;
+                }
+            }
+        }
+        return res;
     }
+
 }

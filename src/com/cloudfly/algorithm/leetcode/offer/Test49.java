@@ -12,10 +12,29 @@ package com.cloudfly.algorithm.leetcode.offer;
 public class Test49 {
 
     public static void main(String[] args) {
-
+        System.out.println(nthUglyNumber(3));
     }
 
-    public int nthUglyNumber(int n) {
-        return 0;
+    public static int nthUglyNumber(int n) {
+        int i = 1;
+        int[] dp = new int[n];
+        int a2 = 0;
+        int a3 = 0;
+        int a5 = 0;
+        dp[0] = 1;
+        while (i < n) {
+            dp[i] = Math.min(Math.min(dp[a2] * 2, dp[a3] * 3), dp[a5] * 5);
+            if (dp[i]==dp[a2]*2){
+                a2++;
+            }
+            if (dp[i]==dp[a3]*3){
+                a3++;
+            }
+            if (dp[i]==dp[a5]*5){
+                a5++;
+            }
+            i++;
+        }
+        return dp[n-1];
     }
 }

@@ -1,5 +1,6 @@
 package com.cloudfly.algorithm.leetcode.twoweek.race31th;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,35 +19,40 @@ import java.util.Map;
 public class Test3 {
 
     public static void main(String[] args) {
-
+        System.out.println(numSplits("aacaba"));
     }
 
-    public int numSplits(String s) {
-        int[] arr = new int[26];
-        int left = 0;
-        int right = s.length() - 1;
-        int leftNum = 0;
-        int rightNum = 0;
+    public static int numSplits(String s) {
+        if (s.length() < 2) {
+            return 0;
+        }
+        int[] left = new int[s.length()];
+        int[] right = new int[s.length()];
+        Map<Character, Integer> leftMap = new HashMap<>();
+        leftMap.put(s.charAt(0), 1);
+        left[0] = 1;
+        Map<Character, Integer> rightMap = new HashMap<>();
+        rightMap.put(s.charAt(s.length() - 1), 1);
+        right[s.length() - 1] = 1;
         int res = 0;
-        while (left < right) {
-            while (arr[s.charAt(left) - 'a'] == 1) {
-                left++;
-
-            }
-            arr[s.charAt(left) - 'a'] = 1;
-            leftNum++;
-            while (arr[s.charAt(right) - 'a'] == 2) {
-                right--;
-            }
-            arr[s.charAt(right) - 'a'] = 2;
-            rightNum++;
-            if (left+1==right){
-                res++;
+        for (int i = 1; i < s.length(); i++) {
+            left[i] = left[i - 1];
+            if (leftMap.get(s.charAt(i)) == null) {
+                leftMap.put(s.charAt(i), 1);
+                left[i] += 1;
             }
         }
-        while (left>=right){
-
-            left++;
+        for (int i = s.length() - 2; i >= 0; i--) {
+            right[i] = right[i + 1];
+            if (rightMap.get(s.charAt(i)) == null) {
+                rightMap.put(s.charAt(i), 1);
+                right[i] += 1;
+            }
+        }
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (left[i] == right[i + 1]) {
+                res += 1;
+            }
         }
         return res;
     }

@@ -36,7 +36,7 @@ public class Test4 {
         }
         count += Math.min(aaa, 2);
         list.add(s.length());
-        if (k==0){
+        if (k == 0) {
             return 3;
         }
 
@@ -72,12 +72,12 @@ public class Test4 {
                     k--;
                     res += 1;
                 }
-                if (a==0 && (i==1 || b<i-1) ){
+                if (a == 0 && (i == 1 || b < i - 1)) {
                     flag = true;
                     break;
                 }
             }
-            if (flag){
+            if (flag) {
                 break;
             }
         }

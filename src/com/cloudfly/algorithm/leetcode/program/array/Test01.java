@@ -1,6 +1,6 @@
 package com.cloudfly.algorithm.leetcode.program.array;
 
-public class Test1 {
+public class Test01 {
 
     public static void main(String[] args) {
         int[] arr = {0};

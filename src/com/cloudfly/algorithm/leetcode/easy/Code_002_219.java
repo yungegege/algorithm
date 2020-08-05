@@ -10,20 +10,22 @@ import java.util.Map;
 public class Code_002_219 {
 
     public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+        System.out.println(containsNearbyDuplicate(arr, 3));
     }
 
-    public boolean containsNearbyDuplicate(int[] nums, int k) {
-        Map<Integer,Integer> map = new HashMap<>();
-        for(int i=0;i<nums.length;i++){
-            if(map.get(nums[i])!=null){
-                if(i-map.get(nums[i])<=k){
+    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.get(nums[i]) != null) {
+                if (i - map.get(nums[i]) <= k) {
                     return true;
                 }
             }
-            map.put(nums[i],i);
+            map.put(nums[i], i);
         }
         return false;
     }
 
-    
+
 }

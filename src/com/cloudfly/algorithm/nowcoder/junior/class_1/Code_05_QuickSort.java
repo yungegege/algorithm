@@ -5,7 +5,7 @@ package com.cloudfly.algorithm.nowcoder.junior.class_1;
  */
 public class Code_05_QuickSort {
     public static void main(String[] args) {
-        int[] arr = new int[]{4, 5, 6, 2, 6, 3, 7, 9, 5, 21, 8, 21, 78, 3, 76, 1, 3, 34, 235, 3, 352, 243, 35, 4754, 3, 26, 12, 21, 423, 24, 574535, 3, 23523, 1215135, 135, 235, 426, 4, 443, 443, 3434};
+        int[] arr = new int[]{4, 5, 6, 2, 6, 3, 7, 9, 5, 21, 8, 21, 78, 3, 76, 1, 3, 34, 235, 3, 352, 243, 35, 4754, 3, 26, 12, 21, 423, 24, 574535, 3, 23523, 1215135, 135, 235, 426, 4, 443, 443, 3434,6};
         quickSort(arr, 0, arr.length - 1);
         printArr(arr);
     }
@@ -32,7 +32,7 @@ public class Code_05_QuickSort {
             }
         }
         swap(arr, i, R);
-        return new int[]{L + 1, more - 1};
+        return new int[]{L+1 , more };
     }
 
     private static void swap(int[] arr, int i, int j) {

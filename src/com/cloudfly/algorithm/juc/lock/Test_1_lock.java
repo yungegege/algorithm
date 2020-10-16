@@ -1,24 +1,56 @@
 package com.cloudfly.algorithm.juc.lock;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Test_1_lock {
 
     public static void main(String[] args) {
+        Thread.interrupted();
         ReentrantLock lock = new ReentrantLock();
         lock.lock();
         lock.tryLock();
+        Condition condition = lock.newCondition();
+        try {
+            condition.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        condition.signal();
         try {
             lock.lockInterruptibly();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         lock.unlock();
-        lock.tryLock();
+
+
+
+        ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+        ReentrantReadWriteLock.WriteLock writeLock = readWriteLock.writeLock();
+        ReentrantReadWriteLock.ReadLock readLock = readWriteLock.readLock();
+
+        writeLock.lock();
+        writeLock.unlock();
+        readLock.lock();
+        readLock.unlock();
+
+
+        System.out.println(1);
+
+
+
+
+
+
+
         AbstractQueuedSynchronizer abstractQueuedSynchronizer = new AbstractQueuedSynchronizer() {
             @Override
             protected boolean tryAcquire(int arg) {
+                getState();
                 return super.tryAcquire(arg);
             }
 

@@ -63,7 +63,7 @@ public class Test_1_CountDownLatch {
         System.out.println(thread1.getName());
         System.out.println(thread2.getName());
         System.out.println(thread3.getName());
-        FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
+        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
                 return null;

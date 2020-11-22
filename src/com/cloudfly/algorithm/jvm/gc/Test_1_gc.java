@@ -1,4 +1,4 @@
-package com.cloudfly.algorithm.juc.gc;
+package com.cloudfly.algorithm.jvm.gc;
 
 import java.util.ArrayList;
 import java.util.List;
